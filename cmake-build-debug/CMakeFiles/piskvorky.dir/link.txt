@@ -1,0 +1,1 @@
+/usr/bin/cc  -g   CMakeFiles/piskvorky.dir/main.c.o CMakeFiles/piskvorky.dir/client.c.o CMakeFiles/piskvorky.dir/server.c.o  -o piskvorky -rdynamic -lpthread 
