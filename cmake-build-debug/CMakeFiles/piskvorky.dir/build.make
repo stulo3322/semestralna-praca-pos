@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /tmp/tmp.GeHaPZbbUX
+CMAKE_SOURCE_DIR = /tmp/tmp.mudt3JwL6O
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /tmp/tmp.GeHaPZbbUX/cmake-build-debug
+CMAKE_BINARY_DIR = /tmp/tmp.mudt3JwL6O/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/piskvorky.dir/depend.make
@@ -57,103 +57,7 @@ include CMakeFiles/piskvorky.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/piskvorky.dir/flags.make
 
-CMakeFiles/piskvorky.dir/main.c.o: CMakeFiles/piskvorky.dir/flags.make
-CMakeFiles/piskvorky.dir/main.c.o: ../main.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/tmp/tmp.GeHaPZbbUX/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/piskvorky.dir/main.c.o"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/piskvorky.dir/main.c.o   -c /tmp/tmp.GeHaPZbbUX/main.c
-
-CMakeFiles/piskvorky.dir/main.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/piskvorky.dir/main.c.i"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /tmp/tmp.GeHaPZbbUX/main.c > CMakeFiles/piskvorky.dir/main.c.i
-
-CMakeFiles/piskvorky.dir/main.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/piskvorky.dir/main.c.s"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /tmp/tmp.GeHaPZbbUX/main.c -o CMakeFiles/piskvorky.dir/main.c.s
-
-CMakeFiles/piskvorky.dir/main.c.o.requires:
-
-.PHONY : CMakeFiles/piskvorky.dir/main.c.o.requires
-
-CMakeFiles/piskvorky.dir/main.c.o.provides: CMakeFiles/piskvorky.dir/main.c.o.requires
-	$(MAKE) -f CMakeFiles/piskvorky.dir/build.make CMakeFiles/piskvorky.dir/main.c.o.provides.build
-.PHONY : CMakeFiles/piskvorky.dir/main.c.o.provides
-
-CMakeFiles/piskvorky.dir/main.c.o.provides.build: CMakeFiles/piskvorky.dir/main.c.o
-
-
-CMakeFiles/piskvorky.dir/client.c.o: CMakeFiles/piskvorky.dir/flags.make
-CMakeFiles/piskvorky.dir/client.c.o: ../client.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/tmp/tmp.GeHaPZbbUX/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/piskvorky.dir/client.c.o"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/piskvorky.dir/client.c.o   -c /tmp/tmp.GeHaPZbbUX/client.c
-
-CMakeFiles/piskvorky.dir/client.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/piskvorky.dir/client.c.i"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /tmp/tmp.GeHaPZbbUX/client.c > CMakeFiles/piskvorky.dir/client.c.i
-
-CMakeFiles/piskvorky.dir/client.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/piskvorky.dir/client.c.s"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /tmp/tmp.GeHaPZbbUX/client.c -o CMakeFiles/piskvorky.dir/client.c.s
-
-CMakeFiles/piskvorky.dir/client.c.o.requires:
-
-.PHONY : CMakeFiles/piskvorky.dir/client.c.o.requires
-
-CMakeFiles/piskvorky.dir/client.c.o.provides: CMakeFiles/piskvorky.dir/client.c.o.requires
-	$(MAKE) -f CMakeFiles/piskvorky.dir/build.make CMakeFiles/piskvorky.dir/client.c.o.provides.build
-.PHONY : CMakeFiles/piskvorky.dir/client.c.o.provides
-
-CMakeFiles/piskvorky.dir/client.c.o.provides.build: CMakeFiles/piskvorky.dir/client.c.o
-
-
-CMakeFiles/piskvorky.dir/server.c.o: CMakeFiles/piskvorky.dir/flags.make
-CMakeFiles/piskvorky.dir/server.c.o: ../server.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/tmp/tmp.GeHaPZbbUX/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/piskvorky.dir/server.c.o"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/piskvorky.dir/server.c.o   -c /tmp/tmp.GeHaPZbbUX/server.c
-
-CMakeFiles/piskvorky.dir/server.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/piskvorky.dir/server.c.i"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /tmp/tmp.GeHaPZbbUX/server.c > CMakeFiles/piskvorky.dir/server.c.i
-
-CMakeFiles/piskvorky.dir/server.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/piskvorky.dir/server.c.s"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /tmp/tmp.GeHaPZbbUX/server.c -o CMakeFiles/piskvorky.dir/server.c.s
-
-CMakeFiles/piskvorky.dir/server.c.o.requires:
-
-.PHONY : CMakeFiles/piskvorky.dir/server.c.o.requires
-
-CMakeFiles/piskvorky.dir/server.c.o.provides: CMakeFiles/piskvorky.dir/server.c.o.requires
-	$(MAKE) -f CMakeFiles/piskvorky.dir/build.make CMakeFiles/piskvorky.dir/server.c.o.provides.build
-.PHONY : CMakeFiles/piskvorky.dir/server.c.o.provides
-
-CMakeFiles/piskvorky.dir/server.c.o.provides.build: CMakeFiles/piskvorky.dir/server.c.o
-
-
-# Object files for target piskvorky
-piskvorky_OBJECTS = \
-"CMakeFiles/piskvorky.dir/main.c.o" \
-"CMakeFiles/piskvorky.dir/client.c.o" \
-"CMakeFiles/piskvorky.dir/server.c.o"
-
-# External object files for target piskvorky
-piskvorky_EXTERNAL_OBJECTS =
-
-piskvorky: CMakeFiles/piskvorky.dir/main.c.o
-piskvorky: CMakeFiles/piskvorky.dir/client.c.o
-piskvorky: CMakeFiles/piskvorky.dir/server.c.o
-piskvorky: CMakeFiles/piskvorky.dir/build.make
-piskvorky: CMakeFiles/piskvorky.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/tmp/tmp.GeHaPZbbUX/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking C executable piskvorky"
-	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/piskvorky.dir/link.txt --verbose=$(VERBOSE)
-
-# Rule to build all files generated by this target.
-CMakeFiles/piskvorky.dir/build: piskvorky
-
-.PHONY : CMakeFiles/piskvorky.dir/build
-
-CMakeFiles/piskvorky.dir/requires: CMakeFiles/piskvorky.dir/main.c.o.requires
-CMakeFiles/piskvorky.dir/requires: CMakeFiles/piskvorky.dir/client.c.o.requires
-CMakeFiles/piskvorky.dir/requires: CMakeFiles/piskvorky.dir/server.c.o.requires
+CMakeFiles/piskvorky.dir/requires:
 
 .PHONY : CMakeFiles/piskvorky.dir/requires
 
@@ -162,6 +66,6 @@ CMakeFiles/piskvorky.dir/clean:
 .PHONY : CMakeFiles/piskvorky.dir/clean
 
 CMakeFiles/piskvorky.dir/depend:
-	cd /tmp/tmp.GeHaPZbbUX/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /tmp/tmp.GeHaPZbbUX /tmp/tmp.GeHaPZbbUX /tmp/tmp.GeHaPZbbUX/cmake-build-debug /tmp/tmp.GeHaPZbbUX/cmake-build-debug /tmp/tmp.GeHaPZbbUX/cmake-build-debug/CMakeFiles/piskvorky.dir/DependInfo.cmake --color=$(COLOR)
+	cd /tmp/tmp.mudt3JwL6O/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /tmp/tmp.mudt3JwL6O /tmp/tmp.mudt3JwL6O /tmp/tmp.mudt3JwL6O/cmake-build-debug /tmp/tmp.mudt3JwL6O/cmake-build-debug /tmp/tmp.mudt3JwL6O/cmake-build-debug/CMakeFiles/piskvorky.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/piskvorky.dir/depend
 

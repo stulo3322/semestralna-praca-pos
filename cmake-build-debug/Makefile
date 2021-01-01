@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /tmp/tmp.GeHaPZbbUX
+CMAKE_SOURCE_DIR = /tmp/tmp.mudt3JwL6O
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /tmp/tmp.GeHaPZbbUX/cmake-build-debug
+CMAKE_BINARY_DIR = /tmp/tmp.mudt3JwL6O/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /tmp/tmp.GeHaPZbbUX/cmake-build-debug/CMakeFiles /tmp/tmp.GeHaPZbbUX/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /tmp/tmp.mudt3JwL6O/cmake-build-debug/CMakeFiles /tmp/tmp.mudt3JwL6O/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /tmp/tmp.GeHaPZbbUX/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /tmp/tmp.mudt3JwL6O/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -123,87 +123,6 @@ piskvorky/fast:
 	$(MAKE) -f CMakeFiles/piskvorky.dir/build.make CMakeFiles/piskvorky.dir/build
 .PHONY : piskvorky/fast
 
-client.o: client.c.o
-
-.PHONY : client.o
-
-# target to build an object file
-client.c.o:
-	$(MAKE) -f CMakeFiles/piskvorky.dir/build.make CMakeFiles/piskvorky.dir/client.c.o
-.PHONY : client.c.o
-
-client.i: client.c.i
-
-.PHONY : client.i
-
-# target to preprocess a source file
-client.c.i:
-	$(MAKE) -f CMakeFiles/piskvorky.dir/build.make CMakeFiles/piskvorky.dir/client.c.i
-.PHONY : client.c.i
-
-client.s: client.c.s
-
-.PHONY : client.s
-
-# target to generate assembly for a file
-client.c.s:
-	$(MAKE) -f CMakeFiles/piskvorky.dir/build.make CMakeFiles/piskvorky.dir/client.c.s
-.PHONY : client.c.s
-
-main.o: main.c.o
-
-.PHONY : main.o
-
-# target to build an object file
-main.c.o:
-	$(MAKE) -f CMakeFiles/piskvorky.dir/build.make CMakeFiles/piskvorky.dir/main.c.o
-.PHONY : main.c.o
-
-main.i: main.c.i
-
-.PHONY : main.i
-
-# target to preprocess a source file
-main.c.i:
-	$(MAKE) -f CMakeFiles/piskvorky.dir/build.make CMakeFiles/piskvorky.dir/main.c.i
-.PHONY : main.c.i
-
-main.s: main.c.s
-
-.PHONY : main.s
-
-# target to generate assembly for a file
-main.c.s:
-	$(MAKE) -f CMakeFiles/piskvorky.dir/build.make CMakeFiles/piskvorky.dir/main.c.s
-.PHONY : main.c.s
-
-server.o: server.c.o
-
-.PHONY : server.o
-
-# target to build an object file
-server.c.o:
-	$(MAKE) -f CMakeFiles/piskvorky.dir/build.make CMakeFiles/piskvorky.dir/server.c.o
-.PHONY : server.c.o
-
-server.i: server.c.i
-
-.PHONY : server.i
-
-# target to preprocess a source file
-server.c.i:
-	$(MAKE) -f CMakeFiles/piskvorky.dir/build.make CMakeFiles/piskvorky.dir/server.c.i
-.PHONY : server.c.i
-
-server.s: server.c.s
-
-.PHONY : server.s
-
-# target to generate assembly for a file
-server.c.s:
-	$(MAKE) -f CMakeFiles/piskvorky.dir/build.make CMakeFiles/piskvorky.dir/server.c.s
-.PHONY : server.c.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -213,15 +132,6 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... piskvorky"
-	@echo "... client.o"
-	@echo "... client.i"
-	@echo "... client.s"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
-	@echo "... server.o"
-	@echo "... server.i"
-	@echo "... server.s"
 .PHONY : help
 
 

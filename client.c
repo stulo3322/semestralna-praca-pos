@@ -1,6 +1,3 @@
-//
-// Created by marti on 30. 12. 2020.
-//
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -17,6 +14,7 @@ int main(int argc, char *argv[])
     struct hostent* server;
 
     char buffer[256];
+    int tah = 0;
 
     if (argc < 3)
     {
@@ -50,31 +48,18 @@ int main(int argc, char *argv[])
     }
     int flag = 0;
     do {
-        printf("Please enter a message ('x' to close): ");
-        bzero(buffer,256);
-        fgets(buffer, 255, stdin);
 
-        if (buffer[0] == 'x') {
-            flag = 1;
-        }
+        printf("Cakaj kym protihrac vyberie policko\n");
 
-        n = write(sockfd, buffer, strlen(buffer));
-        if (n < 0)
-        {
-            perror("Error writing to socket");
-            return 5;
-        }
+        n = recv(sockfd,&tah,200,0);
+        printf("Protihrac vybral policko %d\n",tah);
 
-        bzero(buffer,256);
-        n = read(sockfd, buffer, 255);
-        if (n < 0)
-        {
-            perror("Error reading from socket");
-            return 6;
-        }
 
-        printf("%s\n",buffer);
-    } while (flag != 1);
+
+        printf("Zadaj cislo stvorca: ");
+        scanf("%d",&tah);
+        send(sockfd,&tah,sizeof(tah),0);
+    } while (1);
 
     close(sockfd);
 
