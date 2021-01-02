@@ -6,4 +6,4 @@ set(CMAKE_C_STANDARD 99)
 add_executable(server server.c)
 add_executable(client client.c)
 
-target_link_libraries(piskvorky pthread)
+target_link_libraries(server pthread)

@@ -60,39 +60,76 @@ CMAKE_SOURCE_DIR = /tmp/tmp.mudt3JwL6O
 CMAKE_BINARY_DIR = /tmp/tmp.mudt3JwL6O/cmake-build-debug
 
 #=============================================================================
-# Target rules for target CMakeFiles/piskvorky.dir
+# Target rules for target CMakeFiles/client.dir
 
 # All Build rule for target.
-CMakeFiles/piskvorky.dir/all:
-	$(MAKE) -f CMakeFiles/piskvorky.dir/build.make CMakeFiles/piskvorky.dir/depend
-	$(MAKE) -f CMakeFiles/piskvorky.dir/build.make CMakeFiles/piskvorky.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/tmp/tmp.mudt3JwL6O/cmake-build-debug/CMakeFiles --progress-num= "Built target piskvorky"
-.PHONY : CMakeFiles/piskvorky.dir/all
+CMakeFiles/client.dir/all:
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/depend
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/tmp/tmp.mudt3JwL6O/cmake-build-debug/CMakeFiles --progress-num=1,2 "Built target client"
+.PHONY : CMakeFiles/client.dir/all
 
 # Include target in all.
-all: CMakeFiles/piskvorky.dir/all
+all: CMakeFiles/client.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/piskvorky.dir/rule: cmake_check_build_system
+CMakeFiles/client.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /tmp/tmp.mudt3JwL6O/cmake-build-debug/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/client.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /tmp/tmp.mudt3JwL6O/cmake-build-debug/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/piskvorky.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /tmp/tmp.mudt3JwL6O/cmake-build-debug/CMakeFiles 0
-.PHONY : CMakeFiles/piskvorky.dir/rule
+.PHONY : CMakeFiles/client.dir/rule
 
 # Convenience name for target.
-piskvorky: CMakeFiles/piskvorky.dir/rule
+client: CMakeFiles/client.dir/rule
 
-.PHONY : piskvorky
-
-# clean rule for target.
-CMakeFiles/piskvorky.dir/clean:
-	$(MAKE) -f CMakeFiles/piskvorky.dir/build.make CMakeFiles/piskvorky.dir/clean
-.PHONY : CMakeFiles/piskvorky.dir/clean
+.PHONY : client
 
 # clean rule for target.
-clean: CMakeFiles/piskvorky.dir/clean
+CMakeFiles/client.dir/clean:
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/clean
+.PHONY : CMakeFiles/client.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/client.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/server.dir
+
+# All Build rule for target.
+CMakeFiles/server.dir/all:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/depend
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/tmp/tmp.mudt3JwL6O/cmake-build-debug/CMakeFiles --progress-num=3,4 "Built target server"
+.PHONY : CMakeFiles/server.dir/all
+
+# Include target in all.
+all: CMakeFiles/server.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/server.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /tmp/tmp.mudt3JwL6O/cmake-build-debug/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/server.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /tmp/tmp.mudt3JwL6O/cmake-build-debug/CMakeFiles 0
+.PHONY : CMakeFiles/server.dir/rule
+
+# Convenience name for target.
+server: CMakeFiles/server.dir/rule
+
+.PHONY : server
+
+# clean rule for target.
+CMakeFiles/server.dir/clean:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/clean
+.PHONY : CMakeFiles/server.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/server.dir/clean
 
 .PHONY : clean
 

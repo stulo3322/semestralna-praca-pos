@@ -6,69 +6,78 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <pthread.h>
+
+typedef struct {
+    pthread_mutex_t * mutex;
+    pthread_cond_t * hraPrebieha;
+    pthread_cond_t * mozeSaHrat;
+    int hrac;
+    int vitaz;
+    int riadok;
+    int stlpec;
+    int tah;
+    int sockfd;
+} dataHra;
+
+void* vlaknoHry(void*args) {
 
 
-int hrajHru(int sock, char* buffer) {
+    dataHra * dat = (dataHra *)args;
     int n = 0;
-    int sockfd = sock;
-    int hrac = 0;
-    int vitaz = 0;
-    int riadok = 0;
-    int stlpec = 0;
-    int tah = 0;
     char hraciaPlocha[3][3] = {{'1', '2', '3'},
                                {'4', '5', '6'},
                                {'7', '8', '9'}};
 
-    for (int i = 0; i < 9 && vitaz == 0; i++) {
-
+    for (int i = 0; i < 9 && dat->vitaz == 0; i++) {
         printf("\n\n");
-        printf(" %c | %c | %c\n", hraciaPlocha[0][0], hraciaPlocha[0][1], hraciaPlocha[0][2]);
-        printf("---+---+---\n");
-        printf(" %c | %c | %c\n", hraciaPlocha[1][0], hraciaPlocha[1][1], hraciaPlocha[1][2]);
-        printf("---+---+---\n");
-        printf(" %c | %c | %c\n", hraciaPlocha[2][0], hraciaPlocha[2][1], hraciaPlocha[2][2]);
+        for (int o = 0; o < 3; o++) {
+                printf(" %c | %c | %c\n", hraciaPlocha[o][0], hraciaPlocha[o][1], hraciaPlocha[o][2]);
+                printf("---+---+---\n");
+        }
 
-        hrac = i%2 + 1;
+        dat->hrac = i%2 + 1;
 
         do {
-            if(hrac == 1) {
+            if(dat->hrac == 1) {
                 printf("Zadaj cislo stvorca: \n");
-                scanf("%d", &tah);
-                send(sockfd,&tah,sizeof(tah),0);
+                scanf("%d", &dat->tah);
+                send(dat->sockfd,&dat->tah,sizeof(dat->tah),0);
 
             } else {
                 printf("Cakaj kym protihrac vyberie policko.\n");
-                n = recv(sockfd,&tah,200,0);
-                printf("Protihrac vybral policko %d\n",tah);
+                n = recv(dat->sockfd,&dat->tah,200,0);
+                if(n<1) {
+                    printf("Nepodarilo sa ziskat tah");
+                }
+                printf("Protihrac vybral policko %d\n",dat->tah);
             }
 
-            riadok = --tah/3;
-            stlpec = tah%3;
-        } while(tah<0 || tah > 9 || hraciaPlocha[riadok][stlpec]>'9');
+            dat->riadok = --dat->tah/3;
+            dat->stlpec = dat->tah%3;
+        } while(dat->tah<0 || dat->tah > 9 || hraciaPlocha[dat->riadok][dat->stlpec]>'9');
 
-        hraciaPlocha[riadok][stlpec] = (hrac == 1) ? 'X' : 'O';
+        hraciaPlocha[dat->riadok][dat->stlpec] = (dat->hrac == 1) ? 'X' : 'O';
 
         if((hraciaPlocha[0][0] == hraciaPlocha[1][1] && hraciaPlocha[0][0] == hraciaPlocha[2][2]) ||
            (hraciaPlocha[0][2] == hraciaPlocha[1][1] && hraciaPlocha[0][2] == hraciaPlocha[2][0]))
-            vitaz = hrac;
+            dat->vitaz = dat->hrac;
         else
             for(int j = 0; j <= 2; j++)
                 if((hraciaPlocha[j][0] == hraciaPlocha[j][1] && hraciaPlocha[j][0] == hraciaPlocha[j][2])||
                    (hraciaPlocha[0][j] == hraciaPlocha[1][j] && hraciaPlocha[0][j] == hraciaPlocha[2][j]))
-                    vitaz = hrac;
+                    dat->vitaz = dat->hrac;
     }
 
     printf("\n\n");
-    printf(" %c | %c | %c\n", hraciaPlocha[0][0], hraciaPlocha[0][1], hraciaPlocha[0][2]);
-    printf("---+---+---\n");
-    printf(" %c | %c | %c\n", hraciaPlocha[1][0], hraciaPlocha[1][1], hraciaPlocha[1][2]);
-    printf("---+---+---\n");
-    printf(" %c | %c | %c\n", hraciaPlocha[2][0], hraciaPlocha[2][1], hraciaPlocha[2][2]);
+    for (int o = 0; o < 3; o++) {
+        printf(" %c | %c | %c\n", hraciaPlocha[o][0], hraciaPlocha[o][1], hraciaPlocha[o][2]);
+        printf("---+---+---\n");
+    }
 
-    if(vitaz == 0) {
+    if(dat->vitaz == 0) {
         printf("Remiza\n");
-    } else if (vitaz == 1) {
+    } else if (dat->vitaz == 1) {
         printf("Vyhral si\n");
     } else {
         printf("Prehral si\n");
@@ -110,49 +119,38 @@ int main(int argc, char *argv[])
     }
 
     listen(sockfd, 5);
-    cli_len = sizeof(cli_addr);
 
-    newsockfd = accept(sockfd, (struct sockaddr*)&cli_addr, &cli_len);
-    if (newsockfd < 0)
-    {
-        perror("ERROR on accept");
-        return 3;
+
+
+    pthread_cond_t hraPrebieha;
+    pthread_cond_t mozeSaHrat;
+    pthread_mutex_t mutex;
+
+    pthread_t id[5];
+    int i = 0;
+    while(1) {
+        cli_len = sizeof(cli_addr);
+        newsockfd = accept(sockfd, (struct sockaddr*)&cli_addr, &cli_len);
+        if (newsockfd < 0)
+        {
+            perror("ERROR on accept");
+            return 3;
+        }
+
+        dataHra data = {&mutex,&hraPrebieha,&mozeSaHrat,0,
+                        0,0,0,0,newsockfd};
+
+
+        if (pthread_create(&id[i++],NULL,&vlaknoHry,&data) != 0) {
+            perror("Nepodarilo sa vytvorit vlakno");
+            return 1;
+        }
+        while(i < 5) {
+            pthread_join(id[i++],NULL);
+        }
+
+
     }
-
-    do {
-        hrajHru(newsockfd,&buffer);
-        /* bzero(buffer,256);
-         n = read(newsockfd, buffer, 255);
-         if (n < 0)
-         {
-             perror("Error reading from socket");
-             return 4;
-         }
-         if(buffer[0] != 'x') {
-             printf("Here is the message: %s\n", buffer);
-
-             const char* msg = "I got your message";
-             n = write(newsockfd, msg, strlen(msg)+1);
-             if (n < 0)
-             {
-                 perror("Error writing to socket");
-                 return 5;
-             }
-        } else {
-            printf("Server is closing ");
-
-            const char* msge = "Dovidenia";
-            n = write(newsockfd, msge, strlen(msge)+1);
-            if (n < 0)
-            {
-                perror("Error writing to socket");
-                return 5;
-            }
-        }*/
-
-    } while(buffer != 'x');
-
-
 
     close(newsockfd);
     close(sockfd);
