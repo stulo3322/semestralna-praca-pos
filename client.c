@@ -16,6 +16,13 @@ int main(int argc, char *argv[])
     char buffer[256];
     int tah = 0;
 
+    int riadok = 0;
+    int stlpec = 0;
+    char hraciaPlocha[3][3] = {{'1', '2', '3'},
+                               {'4', '5', '6'},
+                               {'7', '8', '9'}};
+
+
     if (argc < 3)
     {
         fprintf(stderr,"usage %s hostname port\n", argv[0]);
@@ -47,23 +54,42 @@ int main(int argc, char *argv[])
         return 4;
     }
     int flag = 0;
-    do {
 
+    int vitaz = 0;
+
+    for (int i = 0; i < 9 && vitaz == 0; ++i) {
         printf("Cakaj kym protihrac vyberie policko\n");
 
         n = recv(sockfd,&tah,200,0);
+
         printf("Protihrac vybral policko %d\n",tah);
 
+        riadok = --tah/3;
+        stlpec = tah%3;
+        hraciaPlocha[riadok][stlpec] = 'X';
 
+        for (int o = 0; o < 3; o++) {
+            printf(" %c | %c | %c\n", hraciaPlocha[o][0], hraciaPlocha[o][1], hraciaPlocha[o][2]);
+            printf("---+---+---\n");
+        }
 
         printf("Zadaj cislo stvorca: ");
         scanf("%d",&tah);
         send(sockfd,&tah,sizeof(tah),0);
-    } while (1);
+
+        riadok = --tah/3;
+        stlpec = tah%3;
+        hraciaPlocha[riadok][stlpec] = 'O';
+
+        for (int o = 0; o < 3; o++) {
+            printf(" %c | %c | %c\n", hraciaPlocha[o][0], hraciaPlocha[o][1], hraciaPlocha[o][2]);
+            printf("---+---+---\n");
+        }
+
+
+    }
 
     close(sockfd);
 
     return 0;
 }
-
-//zmena

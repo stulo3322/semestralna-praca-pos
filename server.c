@@ -85,7 +85,6 @@ void* vlaknoHry(void*args) {
 
 }
 
-
 int main(int argc, char *argv[])
 {
     int sockfd, newsockfd;
