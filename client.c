@@ -48,17 +48,28 @@ int main(int argc, char *argv[]) {
         perror("Error connecting to socket");
         return 4;
     }
-    int flag = 0;
+
+
 
     int vitaz = 0;
     int spravne = 0;
     char policko = ' ';
+    int opacne = 0;
 
 
     for (int i = 0; i < 9 && vitaz == 0; ++i) {
+        if(i == 0) {
+            recv(sockfd, &tah, 200, 0);
+            if(tah == 5) {
+                opacne = 1;
+            }
+        }
 
+        if(opacne == 0) {
+
+        }
         printf("Cakaj kym protihrac vyberie policko\n");
-            n = recv(sockfd, &tah, 200, 0);
+        recv(sockfd, &tah, 200, 0);
         printf("Protihrac vybral policko %d\n", tah);
 
         riadok = --tah / 3;

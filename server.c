@@ -9,6 +9,10 @@
 #include <pthread.h>
 
 typedef struct {
+    int pocetVytvorenychHier;
+} mainData;
+
+typedef struct {
     pthread_mutex_t * mutex;
     pthread_cond_t * hraPrebieha;
     pthread_cond_t * mozeSaHrat;
@@ -18,12 +22,19 @@ typedef struct {
     int stlpec;
     int tah;
     int sockfd;
+    mainData* mainData;
 } dataHra;
+
+
 
 void* vlaknoHry(void*args) {
 
-
     dataHra * dat = (dataHra *)args;
+    pthread_mutex_lock(dat->mutex);
+    if(dat->mainData->pocetVytvorenychHier > 1) {
+        pthread_cond_wait(dat->mozeSaHrat,dat->mutex);
+    }
+    int opacne = 0;
     int n = 0;
     char hraciaPlocha[3][3] = {{'1', '2', '3'},
                                {'4', '5', '6'},
@@ -36,7 +47,21 @@ void* vlaknoHry(void*args) {
                 printf("---+---+---\n");
         }
 
-        dat->hrac = i%2 + 1;
+        if(i == 0) {
+            dat->hrac = rand() < 0.5 ? 1 : 0;
+            if (dat->hrac == 1) {
+                opacne = 1;
+                dat->tah = 5;
+            }
+            send(dat->sockfd,&dat->tah,sizeof(dat->tah),0);
+
+        }
+        if(opacne == 1) {
+            dat->hrac = i%2;
+        } else {
+            dat->hrac = i%2 + 1;
+        }
+
 
         do {
             if(dat->hrac == 1) {
@@ -82,7 +107,9 @@ void* vlaknoHry(void*args) {
     } else {
         printf("Prehral si\n");
     }
-
+    dat->mainData->pocetVytvorenychHier--;
+    pthread_cond_broadcast(dat->mozeSaHrat);
+    pthread_mutex_unlock(dat->mutex);
 }
 
 int main(int argc, char *argv[])
@@ -90,8 +117,6 @@ int main(int argc, char *argv[])
     int sockfd, newsockfd;
     socklen_t cli_len;
     struct sockaddr_in serv_addr, cli_addr;
-    int n;
-    char buffer;
 
     if (argc < 2)
     {
@@ -119,13 +144,17 @@ int main(int argc, char *argv[])
 
     listen(sockfd, 5);
 
-
+    mainData mainData1 = {0};
 
     pthread_cond_t hraPrebieha;
     pthread_cond_t mozeSaHrat;
     pthread_mutex_t mutex;
 
-    pthread_t id[5];
+    pthread_mutex_init(&mutex,NULL);
+    pthread_cond_init(&hraPrebieha,NULL);
+    pthread_cond_init(&mozeSaHrat,NULL);
+
+
     int i = 0;
     while(1) {
         cli_len = sizeof(cli_addr);
@@ -139,16 +168,14 @@ int main(int argc, char *argv[])
         dataHra data = {&mutex,&hraPrebieha,&mozeSaHrat,0,
                         0,0,0,0,newsockfd};
 
-
-        if (pthread_create(&id[i++],NULL,&vlaknoHry,&data) != 0) {
+        pthread_t id;
+        if (pthread_create(&id,NULL,&vlaknoHry,&data) != 0) {
             perror("Nepodarilo sa vytvorit vlakno");
             return 1;
+        } else {
+            mainData1.pocetVytvorenychHier++;
+            pthread_join(id,NULL);
         }
-        while(i < 5) {
-            pthread_join(id[i++],NULL);
-        }
-
-
     }
 
     close(newsockfd);

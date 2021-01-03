@@ -12,8 +12,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b3097c87-be05-4b45-b2fa-e0398be12f11" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client.c" beforeDir="false" afterPath="$PROJECT_DIR$/client.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.c" beforeDir="false" afterPath="$PROJECT_DIR$/server.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,11 +64,6 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <list>
       <item itemvalue="CMake Application.piskvorky" />
       <item itemvalue="CMake Application.client" />
@@ -85,7 +82,7 @@
       <workItem from="1609595538935" duration="3295000" />
       <workItem from="1609619354959" duration="1516000" />
       <workItem from="1609676769126" duration="1184000" />
-      <workItem from="1609680545853" duration="2721000" />
+      <workItem from="1609680545853" duration="1977000" />
     </task>
     <task id="LOCAL-00001" summary="prva">
       <created>1609341055706</created>
@@ -101,14 +98,7 @@
       <option name="project" value="LOCAL" />
       <updated>1609603174580</updated>
     </task>
-    <task id="LOCAL-00003" summary="uprava2">
-      <created>1609685847533</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1609685847533</updated>
-    </task>
-    <option name="localTasksCounter" value="4" />
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -129,7 +119,6 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="prva" />
     <MESSAGE value="uprava client" />
-    <MESSAGE value="uprava2" />
-    <option name="LAST_COMMIT_MESSAGE" value="uprava2" />
+    <option name="LAST_COMMIT_MESSAGE" value="uprava client" />
   </component>
 </project>
