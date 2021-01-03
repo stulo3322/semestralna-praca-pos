@@ -58,27 +58,11 @@ int main(int argc, char *argv[]) {
     for (int i = 0; i < 9 && vitaz == 0; ++i) {
 
         printf("Cakaj kym protihrac vyberie policko\n");
-
-        do {
             n = recv(sockfd, &tah, 200, 0);
-
-            if (tah > 0 && tah < 10) {
-                riadok = --tah / 3;
-                stlpec = tah % 3;
-                policko = hraciaPlocha[riadok][stlpec];
-
-                if (policko != 'O' || policko != 'X') {
-                    spravne = 1;
-                } else {
-                    printf("Protihrac zadal uz obsadene policko. \n");
-                }
-            } else {
-                printf("Protihrac zadal nespravne policko. \n");
-            }
-
-        } while (spravne != 1);
-
         printf("Protihrac vybral policko %d\n", tah);
+
+        riadok = --tah / 3;
+        stlpec = tah % 3;
         hraciaPlocha[riadok][stlpec] = 'X';
 
         for (int o = 0; o < 3; o++) {
@@ -88,8 +72,6 @@ int main(int argc, char *argv[]) {
             }
 
             printf("\n\n");
-            spravne = 0;
-
 
             printf("Zadaj cislo stvorca: ");
 

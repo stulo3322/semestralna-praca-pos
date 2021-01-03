@@ -85,7 +85,7 @@
       <workItem from="1609595538935" duration="3295000" />
       <workItem from="1609619354959" duration="1516000" />
       <workItem from="1609676769126" duration="1184000" />
-      <workItem from="1609680545853" duration="1977000" />
+      <workItem from="1609680545853" duration="2721000" />
     </task>
     <task id="LOCAL-00001" summary="prva">
       <created>1609341055706</created>
@@ -101,7 +101,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609603174580</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="uprava2">
+      <created>1609685847533</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1609685847533</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -122,6 +129,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="prva" />
     <MESSAGE value="uprava client" />
-    <option name="LAST_COMMIT_MESSAGE" value="uprava client" />
+    <MESSAGE value="uprava2" />
+    <option name="LAST_COMMIT_MESSAGE" value="uprava2" />
   </component>
 </project>
