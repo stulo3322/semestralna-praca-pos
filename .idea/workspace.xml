@@ -11,9 +11,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3097c87-be05-4b45-b2fa-e0398be12f11" name="Default Changelist" comment="uprava client, server opacne poradie">
+    <list default="true" id="b3097c87-be05-4b45-b2fa-e0398be12f11" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client.c" beforeDir="false" afterPath="$PROJECT_DIR$/client.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" afterDir="false" />
@@ -58,12 +59,7 @@
       <recent name="C:\Users\marti\CLionProjects\semestralna-praca-pos" />
     </key>
   </component>
-  <component name="RunManager" selected="CMake Application.piskvorky">
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="CMake Application.client">
     <configuration name="client" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Debug" RUN_PATH="server" EXPLICIT_BUILD_TARGET_NAME="all">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -77,6 +73,11 @@
     <configuration name="server" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="piskvorky" TARGET_NAME="server" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="piskvorky" RUN_TARGET_NAME="server">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <list>
@@ -97,11 +98,9 @@
       <workItem from="1609595538935" duration="3295000" />
       <workItem from="1609619354959" duration="1516000" />
       <workItem from="1609676769126" duration="1184000" />
-      <workItem from="1609680545853" duration="1977000" />
-      <workItem from="1609691147575" duration="23000" />
-      <workItem from="1609760450303" duration="7400000" />
-      <workItem from="1609838504573" duration="4135000" />
-      <workItem from="1609851266553" duration="8549000" />
+      <workItem from="1609680545853" duration="2721000" />
+      <workItem from="1609862940938" duration="600000" />
+      <workItem from="1609925901194" duration="3886000" />
     </task>
     <task id="LOCAL-00001" summary="prva">
       <created>1609341055706</created>
@@ -117,12 +116,12 @@
       <option name="project" value="LOCAL" />
       <updated>1609603174580</updated>
     </task>
-    <task id="LOCAL-00003" summary="uprava client, server opacne poradie">
-      <created>1609688452450</created>
+    <task id="LOCAL-00003" summary="uprava2">
+      <created>1609685847533</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1609688452450</updated>
+      <updated>1609685847533</updated>
     </task>
     <option name="localTasksCounter" value="4" />
     <servers />
@@ -145,7 +144,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="prva" />
     <MESSAGE value="uprava client" />
-    <MESSAGE value="uprava client, server opacne poradie" />
-    <option name="LAST_COMMIT_MESSAGE" value="uprava client, server opacne poradie" />
+    <MESSAGE value="uprava2" />
+    <option name="LAST_COMMIT_MESSAGE" value="uprava2" />
   </component>
 </project>

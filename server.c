@@ -1,31 +1,5 @@
 
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <pthread.h>
-
-typedef struct {
-    int pocetVytvorenychHier;
-} mainData;
-
-typedef struct {
-    pthread_mutex_t * mutex;
-    pthread_cond_t * hraPrebieha;
-    pthread_cond_t * mozeSaHrat;
-    int hrac;
-    int vitaz;
-    int riadok;
-    int stlpec;
-    int tah;
-    int sockfd;
-    mainData* mainData;
-} dataHra;
-
-
+#include "server.h"
 
 void* vlaknoHry(void*args) {
     dataHra * dat = (dataHra *)args;
@@ -62,6 +36,7 @@ void* vlaknoHry(void*args) {
                 printf("hodnota tahu %d\n",dat->tah);
 
             }
+
             if (opacne == 1) {
                 if(i%2==0) {
                     dat->hrac =  2;
