@@ -4,6 +4,7 @@
 void vypisHry(int sockfd){
     int znova = 0;
 
+
     do {
         int hrac = 0;
         int vitaz = 0;

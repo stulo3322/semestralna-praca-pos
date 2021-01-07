@@ -12,4 +12,5 @@
 #include <string.h>
 #include <unistd.h>
 
+
 void vypisHry(int sockfd);

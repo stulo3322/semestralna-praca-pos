@@ -16,6 +16,7 @@ typedef struct {
     int pocetVytvorenychHier;
 } mainData;
 
+
 typedef struct {
     pthread_mutex_t * mutex;
     pthread_cond_t * hraPrebieha;
