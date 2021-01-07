@@ -156,6 +156,12 @@ int main(int argc, char *argv[]) {
         perror("Error connecting to socket");
         return 4;
     }
+    printf("Cakaj na pripojenie k serveru, je mozne ze prebieha ina hra\n");
+    int i = 0;
+    recv(sockfd, &i, 200, 0);
+    if (i == 1) {
+        printf("Pripojenie uspesne\n");
+    }
 
     vypisHry(sockfd);
 

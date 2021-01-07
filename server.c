@@ -36,7 +36,6 @@ void* vlaknoHry(void*args) {
                 printf("hodnota tahu %d\n",dat->tah);
 
             }
-
             if (opacne == 1) {
                 if(i%2==0) {
                     dat->hrac =  2;
