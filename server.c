@@ -109,18 +109,30 @@ void* vlaknoHry(void*args) {
             printf("Prehral si\n");
         }
         */
+        int ok = 0;
+
         printf("Chces hrat znova? (1 - ano, 2 - nie)\n");
-        scanf("%d", &znova);
-        if(znova == 1) {
-            send(dat->sockfd, &znova, sizeof(znova), 0);
-            printf("Cakanie na potvrdenie od protihraca\n");
-            if(recv(dat->sockfd, &znova, 200, 0) == 0) {
-                znova = 2;
-                printf("Protihrac zamietol ponuku o hranie znova\n");
+        do {
+            scanf("%d", &znova);
+            if (znova == 1 || znova == 2) {
+                if (znova == 1) {
+                    send(dat->sockfd, &znova, sizeof(znova), 0);
+                    printf("Cakanie na potvrdenie od protihraca\n");
+                    if (recv(dat->sockfd, &znova, 200, 0) == 0) {
+                        znova = 2;
+                        printf("Protihrac zamietol ponuku o hranie znova\n");
+                    }
+                } else {
+                    send(dat->sockfd, &znova, sizeof(znova), 0);
+                }
+
+                ok = 1;
+
+            } else {
+                printf("Zadali ste nespravnu hodnotu. Skuste znova.");
             }
-        } else {
-            send(dat->sockfd, &znova, sizeof(znova), 0);
-        }
+        } while (ok!=1);
+
         printf("Koniec DO WHILE\n");
     } while(znova == 1);
     printf("po DO WHILE\n");

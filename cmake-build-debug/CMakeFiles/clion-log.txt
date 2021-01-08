@@ -1,26 +1,4 @@
-/usr/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /tmp/tmp.9bYK51lcaY
+/usr/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /tmp/tmp.s4EB6XP5km
 -- Configuring done
-CMake Error at CMakeLists.txt:7 (add_executable):
-  Cannot find source file:
-
-    client.h
-
-  Tried extensions .c .C .c++ .cc .cpp .cxx .m .M .mm .h .hh .h++ .hm .hpp
-  .hxx .in .txx
-
-
-CMake Error at CMakeLists.txt:6 (add_executable):
-  Cannot find source file:
-
-    server.h
-
-  Tried extensions .c .C .c++ .cc .cpp .cxx .m .M .mm .h .hh .h++ .hm .hpp
-  .hxx .in .txx
-
-
-CMake Error: CMake can not determine linker language for target: client
-CMake Error: Cannot determine link language for target "client".
-CMake Error: CMake can not determine linker language for target: server
-CMake Error: Cannot determine link language for target "server".
 -- Generating done
--- Build files have been written to: /tmp/tmp.9bYK51lcaY/cmake-build-debug
+-- Build files have been written to: /tmp/tmp.s4EB6XP5km/cmake-build-debug
