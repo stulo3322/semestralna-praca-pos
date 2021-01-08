@@ -22,6 +22,7 @@ void* vlaknoHry(void*args) {
                 printf("---+---+---\n");
             }
 
+
             if (i == 0) {
                 float nahodne =  rand() % 101;
                 dat->hrac = nahodne < 50 ? 1 : 0;
@@ -36,7 +37,6 @@ void* vlaknoHry(void*args) {
                 printf("hodnota tahu %d\n",dat->tah);
 
             }
-
             if (opacne == 1) {
                 if(i%2==0) {
                     dat->hrac =  2;

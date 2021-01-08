@@ -4,6 +4,7 @@
 void vypisHry(int sockfd){
     int znova = 0;
 
+
     do {
         int hrac = 0;
         int vitaz = 0;
@@ -155,6 +156,12 @@ int main(int argc, char *argv[]) {
     if (connect(sockfd, (struct sockaddr *) &serv_addr, sizeof(serv_addr)) < 0) {
         perror("Error connecting to socket");
         return 7;
+    }
+    printf("Cakaj na pripojenie k serveru, je mozne ze prebieha ina hra\n");
+    int i = 0;
+    recv(sockfd, &i, 200, 0);
+    if (i == 1) {
+        printf("Pripojenie uspesne\n");
     }
 
     vypisHry(sockfd);
