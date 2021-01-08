@@ -53,9 +53,9 @@ void* vlaknoHry(void*args) {
                 printf("hrame normalne\n");
             }
 
-            int jebetomu = 0;
+            int jeToOk = 0;
             do {
-                jebetomu++;
+                jeToOk++;
                 if (dat->hrac == 1) {
                     printf("Zadaj cislo stvorca: \n");
                     scanf("%d", &dat->tah);
@@ -74,7 +74,7 @@ void* vlaknoHry(void*args) {
                 dat->stlpec = dat->tah % 3;
                 dat->tah++;
 
-            } while ((dat->tah < 1 || dat->tah > 9 || hraciaPlocha[dat->riadok][dat->stlpec] > '9') && jebetomu < 5);
+            } while ((dat->tah < 1 || dat->tah > 9 || hraciaPlocha[dat->riadok][dat->stlpec] > '9') && jeToOk < 5);
 
             hraciaPlocha[dat->riadok][dat->stlpec] = (dat->hrac == (opacne == 1 ? 2:1)) ? 'X' : 'O';
 
@@ -135,6 +135,7 @@ void* vlaknoHry(void*args) {
 
         printf("Koniec DO WHILE\n");
     } while(znova == 1);
+
     printf("po DO WHILE\n");
 
     dat->mainData->pocetVytvorenychHier--;
