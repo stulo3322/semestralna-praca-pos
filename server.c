@@ -1,7 +1,7 @@
-
 #include "server.h"
 
 void* vlaknoHry(void*args) {
+
     dataHra * dat = (dataHra *)args;
     pthread_mutex_lock(dat->mutex);
     int opacne = 0;
@@ -110,16 +110,24 @@ void* vlaknoHry(void*args) {
         }
         */
         printf("Chces hrat znova? (1 - ano, 2 - nie)\n");
+        printf("%d\n", dat->sockfd);
         scanf("%d", &znova);
+        printf("Nacital som znova %d\n",znova);
         if(znova == 1) {
-            send(dat->sockfd, &znova, sizeof(znova), 0);
+            printf("if\n");
+            if(send(dat->sockfd, &znova, sizeof(znova), 0) < 0) {
+                printf("Dalsi protihrac sa odpojil\n");
+            };
             printf("Cakanie na potvrdenie od protihraca\n");
             if(recv(dat->sockfd, &znova, 200, 0) == 0) {
                 znova = 2;
                 printf("Protihrac zamietol ponuku o hranie znova\n");
             }
         } else {
-            send(dat->sockfd, &znova, sizeof(znova), 0);
+            printf("else\n");
+            if(send(dat->sockfd, &znova, sizeof(znova), 0) == -1) {
+                printf("Dalsi protihrac sa odpojil\n");
+            };
         }
         printf("Koniec DO WHILE\n");
     } while(znova == 1);
@@ -128,24 +136,6 @@ void* vlaknoHry(void*args) {
     dat->mainData->pocetVytvorenychHier--;
     pthread_cond_broadcast(dat->mozeSaHrat);
     pthread_mutex_unlock(dat->mutex);
-}
-
-void* vlaknoKlient(void* args) {
-    dataHra * dat = (dataHra *)args;
-    if(dat->mainData->pocetVytvorenychHier > 1) {
-        pthread_cond_wait(dat->mozeSaHrat,dat->mutex);
-        printf("moze sa hrat\n");
-    }
-    pthread_t hra;
-    if (pthread_create(&hra,NULL,&vlaknoHry,&dat) != 0) {
-        perror("Nepodarilo sa vytvorit vlakno\n");
-        return 1;
-    } else {
-        dat->mainData->pocetVytvorenychHier++;
-        printf("pocetVytvorenychHier %d\n",dat->mainData->pocetVytvorenychHier++);
-        pthread_join(hra,NULL);
-        printf("vlakno\n");
-    }
 }
 
 int main(int argc, char *argv[])
@@ -182,12 +172,10 @@ int main(int argc, char *argv[])
 
     mainData mainData1 = {0};
 
-    pthread_cond_t hraPrebieha;
     pthread_cond_t mozeSaHrat;
     pthread_mutex_t mutex;
 
     pthread_mutex_init(&mutex,NULL);
-    pthread_cond_init(&hraPrebieha,NULL);
     pthread_cond_init(&mozeSaHrat,NULL);
 
 
@@ -202,19 +190,25 @@ int main(int argc, char *argv[])
             perror("ERROR on accept");
             return 3;
         }
+        sleep(1);
+        int i = 1;
+        if(recv(sockfd, &i, 200, 0) == 0) {
+            printf("Dalsi protihrac sa odpojil\n");
+            close(newsockfd);
+        }
 
-        dataHra data = {&mutex,&hraPrebieha,&mozeSaHrat,0,
+        dataHra data = {&mutex,&mozeSaHrat,0,
                         0,0,0,0,newsockfd,&mainData1};
         printf("data\n");
 
-        pthread_t klient;
-        if (pthread_create(&klient,NULL,&vlaknoKlient,&data) != 0) {
+        pthread_t hra;
+        if (pthread_create(&hra,NULL,&vlaknoHry,&data) != 0) {
             perror("Nepodarilo sa vytvorit vlakno\n");
             return 1;
         } else {
             mainData1.pocetVytvorenychHier++;
             printf("pocetVytvorenychHier %d\n",mainData1.pocetVytvorenychHier);
-            pthread_join(klient,NULL);
+            pthread_join(hra,NULL);
             printf("vlakno\n");
         }
     }
