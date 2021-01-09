@@ -4,7 +4,7 @@ void vypisHry(int sockfd){
     int znova = 0;
 
     do {
-        /*
+        znova = 0;
         int hrac = 0;
         int vitaz = 0;
         int spravne = 0;
@@ -17,11 +17,8 @@ void vypisHry(int sockfd){
                                    {'4', '5', '6'},
                                    {'7', '8', '9'}};
         for (int i = 0; i < 9 && vitaz == 0; ++i) {
-            printf("zaciatok for\n");
-
             if(i == 0) {
                 recv(sockfd, &tah, 200, 0);
-                printf("opacne %d\n",tah);
                 if(tah == 5) {
                     opacne = 1;
                 }
@@ -60,19 +57,16 @@ void vypisHry(int sockfd){
                     spravne = 1;
 
                 } else {
-                    printf("Zadaj cislo stvorca: ");
-
                     do {
+                        printf("Zadaj cislo stvorca: ");
                         scanf("%d", &tah);
-                        printf("nacital som %d\n",tah);
                         if (tah > 0 && tah < 10) {
                             riadok = --tah/3;
                             stlpec = tah%3;
                             tah++;
                             policko = hraciaPlocha[riadok][stlpec];
-                            printf("po vypoctoch je tah %d\n",tah);
 
-                            if (policko != 'O' || policko != 'X') {
+                            if (policko != 'O' && policko != 'X') {
                                 spravne = 1;
                             } else {
                                 printf("Zadali ste uz obsadene policko. \n");
@@ -84,7 +78,6 @@ void vypisHry(int sockfd){
                     } while (spravne != 1);
 
                     send(sockfd, &tah, sizeof(tah), 0);
-                    printf("odoslal som %d\n",tah);
                     hraciaPlocha[riadok][stlpec] = opacne == 1 ? 'X' : 'O';
 
                     for (int o = 0; o < 3; o++) {
@@ -97,9 +90,7 @@ void vypisHry(int sockfd){
                     printf("\n\n");
                 }
             } while(spravne != 1);
-            printf("Cakam na vitaza\n");
             recv(sockfd, &vitaz, 200, 0);
-            printf("Prijal som vitaza %d\n",vitaz);
         }
 
         if(vitaz == 0) {
@@ -109,18 +100,27 @@ void vypisHry(int sockfd){
         } else {
             printf("Vyhral si\n");
         }
-        */
+        int ok = 0;
+
         printf("Chces hrat znova? (1 - ano, 2 - nie)\n");
-        scanf("%d", &znova);
-        if(znova == 1) {
-            send(sockfd, &znova, sizeof(znova), 0);
-            printf("Cakanie na potvrdenie od protihraca\n");
-            if(recv(sockfd, &znova, 200, 0) == 0) {
-                printf("Protihrac zamietol ponuku o hranie znova\n");
+        do {
+            scanf("%d", &znova);
+            if (znova == 1 || znova == 2) {
+                if (znova == 1) {
+                    send(sockfd, &znova, sizeof(znova), 0);
+                    printf("Cakanie na potvrdenie od protihraca\n");
+                    if (recv(sockfd, &znova, 200, 0) == 0) {
+                        znova = 2;
+                        printf("Protihrac zamietol ponuku o hranie znova\n");
+                    }
+                } else {
+                    send(sockfd, &znova, sizeof(znova), 0);
+                }
+                ok = 1;
+            } else {
+                printf("Zadali ste nespravnu hodnotu. Skuste znova.");
             }
-        } else {
-            send(sockfd, &znova, sizeof(znova), 0);
-        }
+        } while (ok!=1);
     } while(znova == 1);
 }
 
@@ -157,12 +157,10 @@ int main(int argc, char *argv[]) {
         return 7;
     }
     printf("Cakaj na pripojenie k serveru... \n");
-    //setsockopt(sockfd,SOL_SOCKET,SO_RCVTIMEO,&timeout, sizeof(timeout));
     int i = 0;
     recv(sockfd, &i, 200, 0);
     i = 3;
     send(sockfd,&i,sizeof(i),0);
-    printf("Cas na pripojenie uplynul, prebieha ina hra\n");
     if (i == 1) {
         printf("Pripojenie uspesne\n");
 

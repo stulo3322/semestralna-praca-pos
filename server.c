@@ -4,14 +4,15 @@ void* vlaknoHry(void*args) {
 
     dataHra * dat = (dataHra *)args;
     pthread_mutex_lock(dat->mutex);
+    srand(time(NULL));
     int opacne = 0;
-
+    char policko = ' ';
     int n = 0;
     int znova = 0;
+    int spravne = 0;
     do {
 
         znova = 0;
-        /*
 
         dat->vitaz = 0;
         char hraciaPlocha[3][3] = {{'1', '2', '3'},
@@ -35,9 +36,6 @@ void* vlaknoHry(void*args) {
                 }
                 sleep(1);
                 send(dat->sockfd, &dat->tah, sizeof(dat->tah), 0);
-                printf("odoslanie opacne cez tah\n");
-                printf("hodnota tahu %d\n",dat->tah);
-
             }
             if (opacne == 1) {
                 if(i%2==0) {
@@ -45,33 +43,28 @@ void* vlaknoHry(void*args) {
                 } else {
                     dat->hrac =  1;
                 }
-                printf("hrame opacne\n");
             } else {
                 if(i%2==0) {
                     dat->hrac =  1;
                 } else {
                     dat->hrac =  2;
                 }
-                printf("hrame normalne\n");
             }
 
-            int jeToOk = 0;
-           int spravne = 0;
+
             do {
-                jeToOk++;
-              spravne = 0;
-
                 if (dat->hrac == 1) {
-                    printf("Zadaj cislo stvorca: \n");
-                  do{
-                    scanf("%d", &dat->tah);
-                    if (dat->tah > 0 && dat->tah < 10) {
-                        dat->riadok = --dat->tah/3;
-                        dat->stlpec = dat->tah%3;
-                        dat->tah++;
-                            printf("po vypoctoch je tah %d\n",dat->tah);
+                    spravne = 0;
+                    do {
+                        printf("Zadaj cislo stvorca: ");
+                        scanf("%d", &dat->tah);
+                        if (dat->tah > 0 && dat->tah < 10) {
+                            dat->riadok = --dat->tah/3;
+                            dat->stlpec = dat->tah%3;
+                            dat->tah++;
+                            policko = hraciaPlocha[dat->riadok][dat->stlpec];
 
-                            if (hraciaPlocha[ dat->riadok][dat->stlpec] != 'O' || hraciaPlocha[ dat->riadok][dat->stlpec] != 'X') {
+                            if (policko != 'O' && policko != 'X') {
                                 spravne = 1;
                             } else {
                                 printf("Zadali ste uz obsadene policko. \n");
@@ -80,10 +73,7 @@ void* vlaknoHry(void*args) {
                             printf("Zadali ste nespravne policko. \n");
                         }
 
-                 } while (spravne !=1);
-
-                    send(dat->sockfd, &dat->tah, sizeof(dat->tah), 0);
-
+                    } while (spravne != 1);
                 } else {
                     printf("Cakaj kym protihrac vyberie policko.\n");
                     n = recv(dat->sockfd, &dat->tah, 200, 0);
@@ -97,8 +87,10 @@ void* vlaknoHry(void*args) {
                 dat->stlpec = dat->tah % 3;
                 dat->tah++;
 
-            } while ((dat->tah < 1 || dat->tah > 9 || hraciaPlocha[dat->riadok][dat->stlpec] > '9') && jeToOk < 5);
-
+            } while (dat->tah < 1 || dat->tah > 9 || hraciaPlocha[dat->riadok][dat->stlpec] > '9');
+            if (dat->hrac == 1) {
+                send(dat->sockfd, &dat->tah, sizeof(dat->tah), 0);
+            }
             hraciaPlocha[dat->riadok][dat->stlpec] = (dat->hrac == (opacne == 1 ? 2:1)) ? 'X' : 'O';
 
             if ((hraciaPlocha[0][0] == hraciaPlocha[1][1] && hraciaPlocha[0][0] == hraciaPlocha[2][2]) ||
@@ -112,10 +104,8 @@ void* vlaknoHry(void*args) {
                     }
                 }
             }
-            printf("skontrolovanie vitaza\n");
             sleep(1);
             send(dat->sockfd, &dat->vitaz, sizeof(dat->vitaz), 0);
-            printf("Odoslal som vitaza %d\n",dat->vitaz);
         }
 
         printf("\n\n");
@@ -135,7 +125,6 @@ void* vlaknoHry(void*args) {
         int ok = 0;
 
         printf("Chces hrat znova? (1 - ano, 2 - nie)\n");
-
         do {
             scanf("%d", &znova);
             if (znova == 1 || znova == 2) {
@@ -156,12 +145,7 @@ void* vlaknoHry(void*args) {
                 printf("Zadali ste nespravnu hodnotu. Skuste znova.");
             }
         } while (ok!=1);
-
-        printf("Koniec DO WHILE\n");
     } while(znova == 1);
-
-    printf("po DO WHILE\n");
-
 
     dat->mainData->pocetVytvorenychHier--;
     pthread_cond_broadcast(dat->mozeSaHrat);
@@ -206,40 +190,44 @@ int main(int argc, char *argv[])
 
     pthread_mutex_init(&mutex,NULL);
     pthread_cond_init(&mozeSaHrat,NULL);
-
-    while(1) {
-        cli_len = sizeof(cli_addr);
-        printf("Cakam na pripojenie protihraca... \n");
-        newsockfd = accept(sockfd, (struct sockaddr*)&cli_addr, &cli_len);
-        printf("pripojenie\n");
-        if (newsockfd < 0)
-        {
-            perror("ERROR on accept");
-            return 3;
-        }
-        int i = 2;
-        send(newsockfd,&i,sizeof(i),0);
-        if(recv(newsockfd, &i, 200, 0) == 0) {
-            printf("Hrac, ktory cakal sa odpojil\n");
-            close(newsockfd);
-        } else {
-            dataHra data = {&mutex,&mozeSaHrat,0,
-                            0,0,0,0,newsockfd,&mainData1};
-            pthread_t hra;
-            if (pthread_create(&hra,NULL,&vlaknoHry,&data) != 0) {
-                perror("Nepodarilo sa vytvorit vlakno\n");
-                return 1;
-            } else {
-                mainData1.pocetVytvorenychHier++;
-                pthread_join(hra,NULL);
+    int znovaServer = 0;
+    while(znovaServer != 2) {
+        printf("Cakat na pripojenie protihraca? (1 - ano, 2 - nie)\n");
+        scanf("%d", &znovaServer);
+        if (znovaServer == 1 || znovaServer == 2) {
+            if(znovaServer == 1) {
+                cli_len = sizeof(cli_addr);
+                printf("Cakam na pripojenie protihraca... \n");
+                newsockfd = accept(sockfd, (struct sockaddr *) &cli_addr, &cli_len);
+                printf("pripojenie\n");
+                if (newsockfd < 0) {
+                    perror("ERROR on accept");
+                    return 3;
+                }
+                int i = 2;
+                send(newsockfd, &i, sizeof(i), 0);
+                if (recv(newsockfd, &i, 200, 0) == 0) {
+                    printf("Hrac, ktory cakal sa odpojil\n");
+                    close(newsockfd);
+                } else {
+                    dataHra data = {&mutex, &mozeSaHrat, 0,
+                                    0, 0, 0, 0, newsockfd, &mainData1};
+                    pthread_t hra;
+                    if (pthread_create(&hra, NULL, &vlaknoHry, &data) != 0) {
+                        perror("Nepodarilo sa vytvorit vlakno\n");
+                        return 1;
+                    } else {
+                        mainData1.pocetVytvorenychHier++;
+                        pthread_join(hra, NULL);
+                    }
+                }
             }
+        } else {
+            printf("Zadali ste nespravnu hodnotu. Skuste znova.");
         }
-
-
-
-
     }
-
+    pthread_mutex_destroy(&mutex);
+    pthread_cond_destroy(&mozeSaHrat);
     close(newsockfd);
     close(sockfd);
 
