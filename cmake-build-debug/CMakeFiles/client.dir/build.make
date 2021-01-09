@@ -43,10 +43,12 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
+
 CMAKE_SOURCE_DIR = /tmp/tmp.RCf6a1B060
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /tmp/tmp.RCf6a1B060/cmake-build-debug
+
 
 # Include any dependencies generated for this target.
 include CMakeFiles/client.dir/depend.make
@@ -59,6 +61,7 @@ include CMakeFiles/client.dir/flags.make
 
 CMakeFiles/client.dir/client.c.o: CMakeFiles/client.dir/flags.make
 CMakeFiles/client.dir/client.c.o: ../client.c
+
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/tmp/tmp.RCf6a1B060/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/client.dir/client.c.o"
 	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/client.dir/client.c.o   -c /tmp/tmp.RCf6a1B060/client.c
 
@@ -69,6 +72,7 @@ CMakeFiles/client.dir/client.c.i: cmake_force
 CMakeFiles/client.dir/client.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/client.dir/client.c.s"
 	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /tmp/tmp.RCf6a1B060/client.c -o CMakeFiles/client.dir/client.c.s
+
 
 CMakeFiles/client.dir/client.c.o.requires:
 
@@ -91,6 +95,7 @@ client_EXTERNAL_OBJECTS =
 client: CMakeFiles/client.dir/client.c.o
 client: CMakeFiles/client.dir/build.make
 client: CMakeFiles/client.dir/link.txt
+
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/tmp/tmp.RCf6a1B060/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable client"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/client.dir/link.txt --verbose=$(VERBOSE)
 
@@ -108,6 +113,8 @@ CMakeFiles/client.dir/clean:
 .PHONY : CMakeFiles/client.dir/clean
 
 CMakeFiles/client.dir/depend:
+
 	cd /tmp/tmp.RCf6a1B060/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /tmp/tmp.RCf6a1B060 /tmp/tmp.RCf6a1B060 /tmp/tmp.RCf6a1B060/cmake-build-debug /tmp/tmp.RCf6a1B060/cmake-build-debug /tmp/tmp.RCf6a1B060/cmake-build-debug/CMakeFiles/client.dir/DependInfo.cmake --color=$(COLOR)
+
 .PHONY : CMakeFiles/client.dir/depend
 

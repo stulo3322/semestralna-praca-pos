@@ -121,12 +121,12 @@
       <option name="project" value="LOCAL" />
       <updated>1609603174580</updated>
     </task>
-    <task id="LOCAL-00003" summary="uprava client, server opacne poradie">
-      <created>1609688452450</created>
+    <task id="LOCAL-00003" summary="uprava2">
+      <created>1609685847533</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1609688452450</updated>
+      <updated>1609685847533</updated>
     </task>
     <task id="LOCAL-00004" summary="uprava client, server opacne poradie">
       <created>1610012228399</created>
@@ -173,7 +173,9 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="martin" />
+
+                        <option value="master" />
+
                       </list>
                     </value>
                   </entry>
@@ -200,6 +202,7 @@
                 </option>
               </RecentGroup>
             </list>
+
           </value>
         </entry>
       </map>

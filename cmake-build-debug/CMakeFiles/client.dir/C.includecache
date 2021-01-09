@@ -6,7 +6,11 @@
 
 #IncludeRegexTransform: 
 
-/tmp/tmp.9bYK51lcaY/client.c
+/tmp/tmp.s4EB6XP5km/client.c
+client.h
+/tmp/tmp.s4EB6XP5km/client.h
+
+/tmp/tmp.s4EB6XP5km/client.h
 sys/types.h
 -
 sys/socket.h

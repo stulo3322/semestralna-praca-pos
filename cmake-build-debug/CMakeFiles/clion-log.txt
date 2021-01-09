@@ -1,3 +1,4 @@
+
 /usr/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /tmp/tmp.RCf6a1B060
 -- The C compiler identification is GNU 6.3.0
 -- Check for working C compiler: /usr/bin/cc
@@ -9,3 +10,4 @@
 -- Configuring done
 -- Generating done
 -- Build files have been written to: /tmp/tmp.RCf6a1B060/cmake-build-debug
+
