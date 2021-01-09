@@ -9,7 +9,7 @@ void* vlaknoHry(void*args) {
     int n = 0;
 
     do {
-        /*
+
         dat->vitaz = 0;
         char hraciaPlocha[3][3] = {{'1', '2', '3'},
                                    {'4', '5', '6'},
@@ -53,12 +53,33 @@ void* vlaknoHry(void*args) {
                 printf("hrame normalne\n");
             }
 
-            int jebetomu = 0;
+            int jeToOk = 0;
+           int spravne = 0;
             do {
-                jebetomu++;
+                jeToOk++;
+              spravne = 0;
+
                 if (dat->hrac == 1) {
                     printf("Zadaj cislo stvorca: \n");
+                  do{
                     scanf("%d", &dat->tah);
+                    if (dat->tah > 0 && dat->tah < 10) {
+                        dat->riadok = --dat->tah/3;
+                        dat->stlpec = dat->tah%3;
+                        dat->tah++;
+                            printf("po vypoctoch je tah %d\n",dat->tah);
+
+                            if (hraciaPlocha[ dat->riadok][dat->stlpec] != 'O' || hraciaPlocha[ dat->riadok][dat->stlpec] != 'X') {
+                                spravne = 1;
+                            } else {
+                                printf("Zadali ste uz obsadene policko. \n");
+                            }
+                        } else {
+                            printf("Zadali ste nespravne policko. \n");
+                        }
+
+                 } while (spravne !=1);
+
                     send(dat->sockfd, &dat->tah, sizeof(dat->tah), 0);
 
                 } else {
@@ -74,7 +95,7 @@ void* vlaknoHry(void*args) {
                 dat->stlpec = dat->tah % 3;
                 dat->tah++;
 
-            } while ((dat->tah < 1 || dat->tah > 9 || hraciaPlocha[dat->riadok][dat->stlpec] > '9') && jebetomu < 5);
+            } while ((dat->tah < 1 || dat->tah > 9 || hraciaPlocha[dat->riadok][dat->stlpec] > '9') && jeToOk < 5);
 
             hraciaPlocha[dat->riadok][dat->stlpec] = (dat->hrac == (opacne == 1 ? 2:1)) ? 'X' : 'O';
 
@@ -108,21 +129,34 @@ void* vlaknoHry(void*args) {
         } else {
             printf("Prehral si\n");
         }
-        */
+
+        int ok = 0;
+
         printf("Chces hrat znova? (1 - ano, 2 - nie)\n");
-        scanf("%d", &znova);
-        if(znova == 1) {
-            send(dat->sockfd, &znova, sizeof(znova), 0);
-            printf("Cakanie na potvrdenie od protihraca\n");
-            if(recv(dat->sockfd, &znova, 200, 0) == 0) {
-                znova = 2;
-                printf("Protihrac zamietol ponuku o hranie znova\n");
+        do {
+            scanf("%d", &znova);
+            if (znova == 1 || znova == 2) {
+                if (znova == 1) {
+                    send(dat->sockfd, &znova, sizeof(znova), 0);
+                    printf("Cakanie na potvrdenie od protihraca\n");
+                    if (recv(dat->sockfd, &znova, 200, 0) == 0) {
+                        znova = 2;
+                        printf("Protihrac zamietol ponuku o hranie znova\n");
+                    }
+                } else {
+                    send(dat->sockfd, &znova, sizeof(znova), 0);
+                }
+
+                ok = 1;
+
+            } else {
+                printf("Zadali ste nespravnu hodnotu. Skuste znova.");
             }
-        } else {
-            send(dat->sockfd, &znova, sizeof(znova), 0);
-        }
+        } while (ok!=1);
+
         printf("Koniec DO WHILE\n");
     } while(znova == 1);
+
     printf("po DO WHILE\n");
 
     dat->mainData->pocetVytvorenychHier--;
