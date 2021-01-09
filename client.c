@@ -157,8 +157,10 @@ int main(int argc, char *argv[]) {
         return 4;
     }
     printf("Cakaj na pripojenie k serveru... \n");
-    setsockopt(sockfd,SOL_SOCKET,SO_RCVTIMEO,&timeout, sizeof(timeout));
+    //setsockopt(sockfd,SOL_SOCKET,SO_RCVTIMEO,&timeout, sizeof(timeout));
     int i = 0;
+    recv(sockfd, &i, 200, 0);
+    i = 3;
     send(sockfd,&i,sizeof(i),0);
     printf("Cas na pripojenie uplynul, prebieha ina hra\n");
     if (i == 1) {
