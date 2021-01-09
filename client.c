@@ -1,11 +1,10 @@
 #include "client.h"
 
-
 void vypisHry(int sockfd){
     int znova = 0;
 
-
     do {
+        /*
         int hrac = 0;
         int vitaz = 0;
         int spravne = 0;
@@ -110,7 +109,7 @@ void vypisHry(int sockfd){
         } else {
             printf("Vyhral si\n");
         }
-
+        */
         printf("Chces hrat znova? (1 - ano, 2 - nie)\n");
         scanf("%d", &znova);
         if(znova == 1) {
@@ -157,15 +156,18 @@ int main(int argc, char *argv[]) {
         perror("Error connecting to socket");
         return 7;
     }
-    printf("Cakaj na pripojenie k serveru, je mozne ze prebieha ina hra\n");
+    printf("Cakaj na pripojenie k serveru... \n");
+    //setsockopt(sockfd,SOL_SOCKET,SO_RCVTIMEO,&timeout, sizeof(timeout));
     int i = 0;
     recv(sockfd, &i, 200, 0);
+    i = 3;
+    send(sockfd,&i,sizeof(i),0);
+    printf("Cas na pripojenie uplynul, prebieha ina hra\n");
     if (i == 1) {
         printf("Pripojenie uspesne\n");
+
     }
-
     vypisHry(sockfd);
-
     close(sockfd);
     return 0;
 }

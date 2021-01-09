@@ -11,15 +11,18 @@
 #include <string.h>
 #include <unistd.h>
 #include <pthread.h>
+#include <errno.h>
 
 typedef struct {
     int pocetVytvorenychHier;
 } mainData;
 
+struct timeval timeout = {
+        .tv_sec = 5
+};
 
 typedef struct {
     pthread_mutex_t * mutex;
-    pthread_cond_t * hraPrebieha;
     pthread_cond_t * mozeSaHrat;
     int hrac;
     int vitaz;
@@ -31,6 +34,3 @@ typedef struct {
 } dataHra;
 
 void* vlaknoHry(void*args);
-void* vlaknoKlient(void* args);
-
-
