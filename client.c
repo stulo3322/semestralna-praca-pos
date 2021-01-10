@@ -3,7 +3,6 @@
 void vypisHry(int sockfd){
     setsockopt(sockfd,SOL_SOCKET,SO_RCVTIMEO,&reset,sizeof reset);
     int znova = 0;
-
     do {
         znova = 0;
         int hrac = 0;

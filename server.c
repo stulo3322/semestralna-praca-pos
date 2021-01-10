@@ -1,7 +1,6 @@
 #include "server.h"
 
 void* vlaknoHry(void*args) {
-
     dataHra * dat = (dataHra *)args;
     pthread_mutex_lock(dat->mutex);
     if(dat->mainData->pocetVytvorenychHier > 1) {
