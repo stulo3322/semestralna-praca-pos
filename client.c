@@ -1,7 +1,7 @@
 #include "client.h"
 
 void vypisHry(int sockfd){
-    setsockopt(sockfd,SOL_SOCKET,SO_RCVTIMEO,&timeout3,sizeof timeout3);
+    setsockopt(sockfd,SOL_SOCKET,SO_RCVTIMEO,&reset,sizeof reset);
     int znova = 0;
 
     do {
@@ -112,7 +112,7 @@ void vypisHry(int sockfd){
             printf("Vyhral si\n");
         }
         int ok = 0;
-
+        int n = 5;
         printf("Chces hrat znova? (1 - ano, 2 - nie)\n");
         do {
             scanf("%d", &znova);
@@ -120,11 +120,26 @@ void vypisHry(int sockfd){
                 if (znova == 1) {
                     send(sockfd, &znova, sizeof(znova), 0);
                     printf("Cakanie na potvrdenie od protihraca\n");
-                    if (recv(sockfd, &znova, 200, 0) == 0) {
+                    n = recv(sockfd, &znova, 200, 0);
+                    if (n == 0) {
                         znova = 2;
-                        printf("Protihrac zamietol ponuku o hranie znova\n");
+                        printf("Protihrac sa odpojil.\n");
+
+                    } else if (n < 0) {
+                        znova = 2;
+                        printf("Chyba.\n");
+
+                    } else {
+                        if (znova == 1) {
+                            printf("Protihrac chce hrat znova,\n");
+                        } else if (znova == 2) {
+                            printf("Protihrac nechce hrat znova.\n");
+                        } else {
+                            printf("Chyba.\n");
+                        }
                     }
                 } else {
+                    printf("Nechcem hrat dalsiu hru.\n");
                     send(sockfd, &znova, sizeof(znova), 0);
                 }
                 ok = 1;
@@ -134,7 +149,6 @@ void vypisHry(int sockfd){
         } while (ok!=1);
     } while(znova == 1);
 }
-
 
 int main(int argc, char *argv[]) {
     int sockfd;

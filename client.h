@@ -19,8 +19,8 @@ struct timeval timeout2 = {
         .tv_sec = 20
 };
 
-struct timeval timeout3 = {
-        .tv_sec = 180
+struct timeval reset = {
+        .tv_sec = 0
 };
 
 void vypisHry(int sockfd);
