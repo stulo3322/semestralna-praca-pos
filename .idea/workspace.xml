@@ -11,10 +11,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3097c87-be05-4b45-b2fa-e0398be12f11" name="Default Changelist" comment="posledne upravy">
+    <list default="true" id="b3097c87-be05-4b45-b2fa-e0398be12f11" name="Default Changelist" comment="posledne upravy uz fakt">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client.c" beforeDir="false" afterPath="$PROJECT_DIR$/client.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client.h" beforeDir="false" afterPath="$PROJECT_DIR$/client.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server.c" beforeDir="false" afterPath="$PROJECT_DIR$/server.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -105,7 +104,7 @@
       <workItem from="1610012465864" duration="2393000" />
       <workItem from="1610113149036" duration="7284000" />
       <workItem from="1610269807067" duration="1397000" />
-      <workItem from="1610286173127" duration="4814000" />
+      <workItem from="1610286173127" duration="8278000" />
     </task>
     <task id="LOCAL-00001" summary="prva">
       <created>1609341055706</created>
@@ -163,7 +162,14 @@
       <option name="project" value="LOCAL" />
       <updated>1610287381923</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="posledne upravy uz fakt">
+      <created>1610292048451</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1610292048451</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -201,6 +207,7 @@
     <MESSAGE value="h" />
     <MESSAGE value="final" />
     <MESSAGE value="posledne upravy" />
-    <option name="LAST_COMMIT_MESSAGE" value="posledne upravy" />
+    <MESSAGE value="posledne upravy uz fakt" />
+    <option name="LAST_COMMIT_MESSAGE" value="posledne upravy uz fakt" />
   </component>
 </project>

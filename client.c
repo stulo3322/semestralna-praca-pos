@@ -21,20 +21,24 @@ void vypisHry(int sockfd){
             if(i == 0) {
                 recv(sockfd, &tah, 200, 0);
                 if(tah == 5) {
+                    printf("Nahodny vyber hraca : Zacinate.\n");
                     opacne = 1;
+                }else{
+                    printf("Nahodny vyber hraca : Zacina protihrac.\n");
                 }
 
                 printf("\n\n");
-
                 for (int o = 0; o < 3; o++) {
                     printf(" %c | %c | %c\n", hraciaPlocha[o][0], hraciaPlocha[o][1], hraciaPlocha[o][2]);
                     if (o < 2) {
                         printf("---+---+---\n");
                     }
                 }
-
                 printf("\n\n");
             }
+
+
+
 
             if(opacne == 1) {
                 hrac = i%2;
@@ -45,7 +49,7 @@ void vypisHry(int sockfd){
             do {
                 spravne = 0;
                 if(hrac == 1) {
-                    printf("Cakaj kym protihrac vyberie policko\n");
+                    printf("Cakajte kym protihrac vyberie policko\n");
                     recv(sockfd, &tah, 200, 0);
                     printf("Protihrac vybral policko %d\n", tah);
 
@@ -67,7 +71,7 @@ void vypisHry(int sockfd){
 
                 } else {
                     do {
-                        printf("Zadaj cislo stvorca: ");
+                        printf("Zadajte cislo stvorca: ");
                         scanf("%d", &tah);
                         if (tah > 0 && tah < 10) {
                             riadok = --tah/3;
@@ -107,13 +111,13 @@ void vypisHry(int sockfd){
         if(vitaz == 0) {
             printf("Remiza\n");
         } else if (vitaz == 1) {
-            printf("Prehral si\n");
+            printf("Prehrali ste\n");
         } else {
-            printf("Vyhral si\n");
+            printf("Vyhrali ste\n");
         }
         int ok = 0;
         int n = 5;
-        printf("Chces hrat znova? (1 - ano, 2 - nie)\n");
+        printf("Chcete hrat znova? (1 - ano, 2 - nie)\n");
         do {
             scanf("%d", &znova);
             if (znova == 1 || znova == 2) {
@@ -139,7 +143,7 @@ void vypisHry(int sockfd){
                         }
                     }
                 } else {
-                    printf("Nechcem hrat dalsiu hru.\n");
+                    printf("Koniec hry.\n");
                     send(sockfd, &znova, sizeof(znova), 0);
                 }
                 ok = 1;
@@ -181,7 +185,7 @@ int main(int argc, char *argv[]) {
         perror("Error connecting to socket");
         return 7;
     }
-    printf("Cakaj na pripojenie k serveru... \n");
+    printf("Cakajte na pripojenie k serveru... \n");
 
     int i = 0;
     int znova = 0;
@@ -225,8 +229,10 @@ int main(int argc, char *argv[]) {
         }
         vypisHry(sockfd);
         close(sockfd);
+        printf("Dovidenia, prajem prijemny zvysok dna.\n");
     } else {
         close(sockfd);
+        printf("Dovidenia, prajem prijemny zvysok dna.\n");
     }
 
     return 0;
