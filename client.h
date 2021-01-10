@@ -15,4 +15,12 @@ struct timeval timeout = {
         .tv_sec = 5
 };
 
+struct timeval timeout2 = {
+        .tv_sec = 20
+};
+
+struct timeval reset = {
+        .tv_sec = 0
+};
+
 void vypisHry(int sockfd);

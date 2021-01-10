@@ -19,20 +19,17 @@ void* vlaknoHry(void*args) {
                                    {'4', '5', '6'},
                                    {'7', '8', '9'}};
         for (int i = 0; i < 9 && dat->vitaz == 0; i++) {
-            printf("\n\n");
-            for (int o = 0; o < 3; o++) {
-                printf(" %c | %c | %c\n", hraciaPlocha[o][0], hraciaPlocha[o][1], hraciaPlocha[o][2]);
-                printf("---+---+---\n");
-            }
-
 
             if (i == 0) {
                 float nahodne =  rand() % 101;
                 dat->hrac = nahodne < 50 ? 1 : 0;
-                printf("hodnota rand pre hraca %f\n",nahodne);
+                printf("\n\n");
                 if (dat->hrac == 1) {
+                    printf("Nahodny vyber hraca : Zacina protihrac.\n");
                     opacne = 1;
                     dat->tah = 5;
+                } else{
+                    printf("Nahodny vyber hraca : Zacinate.\n");
                 }
                 sleep(1);
                 send(dat->sockfd, &dat->tah, sizeof(dat->tah), 0);
@@ -51,12 +48,20 @@ void* vlaknoHry(void*args) {
                 }
             }
 
+            printf("\n\n");
+            for (int o = 0; o < 3; o++) {
+                printf(" %c | %c | %c\n", hraciaPlocha[o][0], hraciaPlocha[o][1], hraciaPlocha[o][2]);
+                if (o < 2) {
+                    printf("---+---+---\n");
+                }
+            }
+            printf("\n\n");
 
             do {
                 if (dat->hrac == 1) {
                     spravne = 0;
                     do {
-                        printf("Zadaj cislo stvorca: ");
+                        printf("Zadajte cislo stvorca: ");
                         scanf("%d", &dat->tah);
                         if (dat->tah > 0 && dat->tah < 10) {
                             dat->riadok = --dat->tah/3;
@@ -75,7 +80,7 @@ void* vlaknoHry(void*args) {
 
                     } while (spravne != 1);
                 } else {
-                    printf("Cakaj kym protihrac vyberie policko.\n");
+                    printf("Cakajte kym protihrac vyberie policko.\n");
                     n = recv(dat->sockfd, &dat->tah, 200, 0);
                     if (n < 1) {
                         printf("Nepodarilo sa ziskat tah");
@@ -111,36 +116,56 @@ void* vlaknoHry(void*args) {
         printf("\n\n");
         for (int o = 0; o < 3; o++) {
             printf(" %c | %c | %c\n", hraciaPlocha[o][0], hraciaPlocha[o][1], hraciaPlocha[o][2]);
-            printf("---+---+---\n");
+            if (o < 2) {
+                printf("---+---+---\n");
+            }
         }
+        printf("\n\n");
 
         if(dat->vitaz == 0) {
             printf("Remiza\n");
         } else if (dat->vitaz == 1) {
-            printf("Vyhral si\n");
+            printf("Vyhrali ste\n");
         } else {
-            printf("Prehral si\n");
+            printf("Prehrali ste\n");
         }
 
         int ok = 0;
 
-        printf("Chces hrat znova? (1 - ano, 2 - nie)\n");
+        printf("Chcete hrat znova? (1 - ano, 2 - nie)\n");
         do {
             scanf("%d", &znova);
             if (znova == 1 || znova == 2) {
                 if (znova == 1) {
                     send(dat->sockfd, &znova, sizeof(znova), 0);
                     printf("Cakanie na potvrdenie od protihraca\n");
-                    if (recv(dat->sockfd, &znova, 200, 0) == 0) {
+                    n = recv(dat->sockfd, &znova, 200, 0);
+                    if ( n == 0) {
                         znova = 2;
-                        printf("Protihrac zamietol ponuku o hranie znova\n");
+                        printf("Protihrac sa odpojil.\n");
+
+                    } else if (n < 0) {
+                        znova = 2;
+                        printf("Chyba.\n");
+
+                    } else{
+                        if(znova == 1)
+                        {
+                            printf("Protihrac chce hrat znova,\n");
+                        } else if (znova == 2)
+                        {
+                            printf("Protihrac nechce hrat znova.\n");
+                        }
+                        else{
+                            printf("Chyba.\n");
+                        }
                     }
                 } else {
+                    printf("Koniec hry s aktualnym protihracom.\n");
                     send(dat->sockfd, &znova, sizeof(znova), 0);
                 }
 
                 ok = 1;
-
             } else {
                 printf("Zadali ste nespravnu hodnotu. Skuste znova.");
             }
@@ -192,14 +217,14 @@ int main(int argc, char *argv[])
     pthread_cond_init(&mozeSaHrat,NULL);
     int znovaServer = 0;
     while(znovaServer != 2) {
+        printf("\n\n");
         printf("Cakat na pripojenie protihraca? (1 - ano, 2 - nie)\n");
         scanf("%d", &znovaServer);
         if (znovaServer == 1 || znovaServer == 2) {
             if(znovaServer == 1) {
                 cli_len = sizeof(cli_addr);
-                printf("Cakam na pripojenie protihraca... \n");
+                printf("Cakajte na pripojenie protihraca... \n");
                 newsockfd = accept(sockfd, (struct sockaddr *) &cli_addr, &cli_len);
-                printf("pripojenie\n");
                 if (newsockfd < 0) {
                     perror("ERROR on accept");
                     return 3;
@@ -226,6 +251,7 @@ int main(int argc, char *argv[])
             printf("Zadali ste nespravnu hodnotu. Skuste znova.");
         }
     }
+    printf("Dovidenia, prajem prijemny zvysok dna.\n");
     pthread_mutex_destroy(&mutex);
     pthread_cond_destroy(&mozeSaHrat);
     close(newsockfd);
