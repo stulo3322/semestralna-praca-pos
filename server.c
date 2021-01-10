@@ -4,6 +4,9 @@ void* vlaknoHry(void*args) {
 
     dataHra * dat = (dataHra *)args;
     pthread_mutex_lock(dat->mutex);
+    if(dat->mainData->pocetVytvorenychHier > 1) {
+        pthread_cond_wait(dat->mozeSaHrat,dat->mutex);
+    }
     srand(time(NULL));
     int opacne = 0;
     char policko = ' ';
@@ -13,7 +16,6 @@ void* vlaknoHry(void*args) {
     do {
 
         znova = 0;
-
         dat->vitaz = 0;
         char hraciaPlocha[3][3] = {{'1', '2', '3'},
                                    {'4', '5', '6'},

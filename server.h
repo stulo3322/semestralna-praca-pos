@@ -17,10 +17,6 @@ typedef struct {
     int pocetVytvorenychHier;
 } mainData;
 
-struct timeval timeout = {
-        .tv_sec = 5
-};
-
 typedef struct {
     pthread_mutex_t * mutex;
     pthread_cond_t * mozeSaHrat;
