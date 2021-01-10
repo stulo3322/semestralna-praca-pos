@@ -22,7 +22,9 @@ void* vlaknoHry(void*args) {
             printf("\n\n");
             for (int o = 0; o < 3; o++) {
                 printf(" %c | %c | %c\n", hraciaPlocha[o][0], hraciaPlocha[o][1], hraciaPlocha[o][2]);
-                printf("---+---+---\n");
+                if (o < 2) {
+                    printf("---+---+---\n");
+                }
             }
 
 
@@ -111,7 +113,9 @@ void* vlaknoHry(void*args) {
         printf("\n\n");
         for (int o = 0; o < 3; o++) {
             printf(" %c | %c | %c\n", hraciaPlocha[o][0], hraciaPlocha[o][1], hraciaPlocha[o][2]);
-            printf("---+---+---\n");
+            if (o < 2) {
+                printf("---+---+---\n");
+            }
         }
 
         if(dat->vitaz == 0) {
@@ -199,7 +203,6 @@ int main(int argc, char *argv[])
                 cli_len = sizeof(cli_addr);
                 printf("Cakam na pripojenie protihraca... \n");
                 newsockfd = accept(sockfd, (struct sockaddr *) &cli_addr, &cli_len);
-                printf("pripojenie\n");
                 if (newsockfd < 0) {
                     perror("ERROR on accept");
                     return 3;

@@ -1,6 +1,7 @@
 #include "client.h"
 
 void vypisHry(int sockfd){
+    setsockopt(sockfd,SOL_SOCKET,SO_RCVTIMEO,&timeout3,sizeof timeout3);
     int znova = 0;
 
     do {
@@ -22,12 +23,17 @@ void vypisHry(int sockfd){
                 if(tah == 5) {
                     opacne = 1;
                 }
+
+                printf("\n\n");
+
                 for (int o = 0; o < 3; o++) {
                     printf(" %c | %c | %c\n", hraciaPlocha[o][0], hraciaPlocha[o][1], hraciaPlocha[o][2]);
                     if (o < 2) {
                         printf("---+---+---\n");
                     }
                 }
+
+                printf("\n\n");
             }
 
             if(opacne == 1) {
@@ -47,12 +53,15 @@ void vypisHry(int sockfd){
                     stlpec = tah % 3;
                     hraciaPlocha[riadok][stlpec] = opacne == 1 ? 'O' : 'X';
 
+                    printf("\n\n");
+
                     for (int o = 0; o < 3; o++) {
                         printf(" %c | %c | %c\n", hraciaPlocha[o][0], hraciaPlocha[o][1], hraciaPlocha[o][2]);
                         if (o < 2) {
                             printf("---+---+---\n");
                         }
                     }
+
                     printf("\n\n");
                     spravne = 1;
 
@@ -79,6 +88,8 @@ void vypisHry(int sockfd){
 
                     send(sockfd, &tah, sizeof(tah), 0);
                     hraciaPlocha[riadok][stlpec] = opacne == 1 ? 'X' : 'O';
+
+                    printf("\n\n");
 
                     for (int o = 0; o < 3; o++) {
                         printf(" %c | %c | %c\n", hraciaPlocha[o][0], hraciaPlocha[o][1], hraciaPlocha[o][2]);
@@ -157,15 +168,52 @@ int main(int argc, char *argv[]) {
         return 7;
     }
     printf("Cakaj na pripojenie k serveru... \n");
-    int i = 0;
-    recv(sockfd, &i, 200, 0);
-    i = 3;
-    send(sockfd,&i,sizeof(i),0);
-    if (i == 1) {
-        printf("Pripojenie uspesne\n");
 
+    int i = 0;
+    int znova = 0;
+    int ok = 0;
+    setsockopt(sockfd,SOL_SOCKET,SO_RCVTIMEO,&timeout,sizeof timeout);
+    recv(sockfd, &i, 200, 0);
+
+    if(i == 0) {
+        printf("Prave prebieha ina hra.\n");
+        do {
+            printf("Chcete pokracovat v cakani (+20 sekund)? {1 - ano, 2 - nie}\n");
+            scanf("%d", &znova);
+            if (znova == 1 || znova == 2) {
+                if (znova == 1) {
+                    setsockopt(sockfd, SOL_SOCKET, SO_RCVTIMEO, &timeout2, sizeof timeout2);
+                    printf("Cakanie na ukoncenie prebiehajucej hry\n");
+                    recv(sockfd, &i, 200, 0);
+                    if (i == 0) {
+                        ok = 0;
+                        printf("Cas uplynul.\n");
+                    } else {
+                        ok = 1;
+                    }
+                } else {
+                    ok = 2;
+                }
+
+            } else {
+                printf("Zadali ste nespravnu hodnotu. Skuste znova.");
+            }
+        } while (ok < 1);
+    } else {
+        ok = 1;
     }
-    vypisHry(sockfd);
-    close(sockfd);
+    if(ok == 1) {
+        i = 3;
+        send(sockfd,&i,sizeof(i),0);
+        if (i == 1) {
+            printf("Pripojenie uspesne\n");
+
+        }
+        vypisHry(sockfd);
+        close(sockfd);
+    } else {
+        close(sockfd);
+    }
+
     return 0;
 }
